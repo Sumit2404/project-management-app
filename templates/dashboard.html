@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOVA - Dashboard</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #050505;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            background: #000000;
+            color: white;
+            padding: 20px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-bottom: 1px solid #1d1d1d;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .welcome {
+            font-size: 15px;
+            color: #d6d6d6;
+        }
+
+
+        /* =========================
+           LOGOUT BUTTON
+        ========================= */
+
+        .logout {
+            display: inline-block;
+
+            padding: 10px 18px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            color: #fff;
+
+            background-color: #000;
+
+            border: 2px solid #00e5ff;
+
+            border-radius: 10px;
+
+            box-shadow: 5px 5px 0px #00e5ff;
+
+            transition: all 0.3s ease;
+
+            cursor: pointer;
+        }
+
+        .logout:hover {
+            background-color: #fff;
+
+            color: #000;
+
+            border: 2px solid #00e5ff;
+
+            box-shadow: 5px 5px 0px #00e5ff;
+        }
+
+        .logout:active {
+            background-color: #fcf414;
+
+            color: #000;
+
+            box-shadow: none;
+
+            transform: translateY(4px);
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .page-title p {
+            color: #a8a8a8;
+        }
+
+
+        /* =========================
+           CREATE PROJECT CARD
+        ========================= */
+
+        .create-card {
+            background: #101010;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            border: 1px solid #222222;
+
+            box-shadow:
+                0 3px 15px rgba(0,0,0,0.5);
+
+            margin-bottom: 35px;
+        }
+
+        .create-card h2 {
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+
+        /* =========================
+           PROJECT FORM
+        ========================= */
+
+        .project-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px;
+        }
+
+
+        /* =========================
+           UIVERSE PROJECT INPUT
+        ========================= */
+
+        .input__container {
+            position: relative;
+
+            background: #171717;
+
+            padding: 20px;
+
+            display: flex;
+
+            justify-content: flex-start;
+
+            align-items: center;
+
+            gap: 15px;
+
+            border: 4px solid #000;
+
+            width: 100%;
+
+            max-width: 500px;
+
+            transition:
+                all 400ms cubic-bezier(
+                    0.23,
+                    1,
+                    0.32,
+                    1
+                );
+
+            transform-style: preserve-3d;
+
+            transform:
+                rotateX(10deg)
+                rotateY(-10deg);
+
+            perspective: 1000px;
+
+            box-shadow:
+                10px 10px 0 #000;
+        }
+
+
+        .input__container:hover {
+            transform:
+                rotateX(5deg)
+                rotateY(1deg)
+                scale(1.03);
+
+            box-shadow:
+                25px 25px 0 -5px #e9b50b,
+                25px 25px 0 0 #000;
+        }
+
+
+        /* =========================
+           INPUT SHADOW
+        ========================= */
+
+        .shadow__input {
+            content: "";
+
+            position: absolute;
+
+            width: 100%;
+
+            height: 100%;
+
+            left: 0;
+
+            bottom: 0;
+
+            z-index: -1;
+
+            transform:
+                translateZ(-50px);
+
+            background:
+                linear-gradient(
+                    45deg,
+                    rgba(0, 229, 255, 0.25) 0%,
+                    rgba(0, 229, 255, 0.05) 100%
+                );
+
+            filter: blur(20px);
+        }
+
+
+        /* =========================
+           INPUT FIELD
+        ========================= */
+
+        .input__search {
+            width: 100%;
+
+            outline: none;
+
+            border: 3px solid #000;
+
+            padding: 15px;
+
+            font-size: 18px;
+
+            background: #242424;
+
+            color: #ffffff;
+
+            transform:
+                translateZ(10px);
+
+            transition:
+                all 400ms cubic-bezier(
+                    0.23,
+                    1,
+                    0.32,
+                    1
+                );
+
+            position: relative;
+
+            z-index: 3;
+
+            font-family: Arial, sans-serif;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .input__search::placeholder {
+            color: #a5a5a5;
+
+            font-weight: bold;
+
+            text-transform: uppercase;
+        }
+
+
+        .input__search:hover,
+        .input__search:focus {
+            background: #303030;
+
+            color: #ffffff;
+
+            transform:
+                translateZ(20px)
+                translateX(-5px)
+                translateY(-5px);
+
+            box-shadow:
+                5px 5px 0 0 #000;
+        }
+
+
+        /* =========================
+           PROJECT DESCRIPTION
+        ========================= */
+
+        .input__description {
+            min-height: 120px;
+
+            resize: vertical;
+
+            line-height: 1.4;
+        }
+
+
+        /* =========================
+           INPUT LABELS
+        ========================= */
+
+        .input__container::before {
+            content: "PROJECT NAME";
+
+            position: absolute;
+
+            top: -15px;
+
+            left: 20px;
+
+            background: #e9b50b;
+
+            color: #000;
+
+            font-weight: bold;
+
+            padding: 5px 10px;
+
+            font-size: 14px;
+
+            transform:
+                translateZ(50px);
+
+            z-index: 4;
+
+            border: 2px solid #000;
+        }
+
+
+        .description-container::before {
+            content: "PROJECT DESCRIPTION";
+        }
+
+
+        /* =========================
+           ALL BUTTONS
+        ========================= */
+
+        button {
+            font-size: 1rem;
+
+            padding: 0.8em 2em;
+
+            background-color: #000;
+
+            border: 3px solid yellow;
+
+            border-radius: 1em;
+
+            color: #fff;
+
+            font-weight: bolder;
+
+            cursor: pointer;
+
+            transition:
+                cubic-bezier(
+                    0.68,
+                    -0.55,
+                    0.265,
+                    1.55
+                ) 0.4s;
+
+            box-shadow:
+                -5px 5px 0px 0px yellow;
+        }
+
+
+        button:hover {
+            transform:
+                translate(5px, -5px);
+        }
+
+
+        /* =========================
+           CREATE PROJECT BUTTON
+        ========================= */
+
+        .create-button {
+            width: fit-content;
+
+            background-color: #000;
+
+            border: 3px solid yellow;
+
+            border-radius: 1em;
+
+            color: #fff;
+
+            padding: 0.8em 2em;
+
+            font-size: 1rem;
+
+            font-weight: bolder;
+
+            cursor: pointer;
+
+            box-shadow:
+                -5px 5px 0px 0px yellow;
+
+            transition:
+                cubic-bezier(
+                    0.68,
+                    -0.55,
+                    0.265,
+                    1.55
+                ) 0.4s;
+        }
+
+
+        .create-button:hover {
+            background-color: #000;
+
+            transform:
+                translate(5px, -5px);
+
+            box-shadow:
+                -5px 5px 0px 0px yellow;
+        }
+
+
+        .create-button:active {
+            transform:
+                translate(2px, -2px);
+        }
+
+
+        /* =========================
+           PROJECTS
+        ========================= */
+
+        .projects-header {
+            margin-bottom: 25px;
+        }
+
+        .projects-header h2 {
+            font-size: 24px;
+            color: #ffffff;
+        }
+
+        .projects-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(280px,1fr)
+                );
+
+            gap: 25px;
+        }
+
+
+        /* =========================
+           FUTURISTIC PROJECT CARD
+        ========================= */
+
+        .project-card {
+
+            --white: hsl(0, 0%, 100%);
+            --black: hsl(240, 15%, 9%);
+            --paragraph: hsl(0, 0%, 83%);
+            --line: hsl(240, 9%, 17%);
+            --primary: hsl(189, 92%, 58%);
+
+            position: relative;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 1rem;
+
+            padding: 1.5rem;
+
+            width: 100%;
+
+            min-height: 230px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #171126 0%,
+                    #21183d 45%,
+                    #10182f 100%
+                );
+
+            border-radius: 1rem;
+
+            border: 1px solid rgba(0, 229, 255, 0.45);
+
+            box-shadow:
+                0 0 8px rgba(0, 229, 255, 0.25),
+                0 0 22px rgba(0, 229, 255, 0.15),
+                0px -10px 24px rgba(126, 87, 255, 0.18) inset;
+
+            overflow: hidden;
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+        /* =========================
+           CONSTANT INNER GLOW
+        ========================= */
+
+        .project-card::before {
+
+            content: "";
+
+            pointer-events: none;
+
+            position: absolute;
+
+            inset: 0;
+
+            border-radius: 1rem;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(126, 87, 255, 0.18),
+                    transparent 45%
+                ),
+                radial-gradient(
+                    circle at 85% 85%,
+                    rgba(0, 229, 255, 0.15),
+                    transparent 45%
+                );
+
+            z-index: 0;
+        }
+
+
+        /* =========================
+           CONSTANT BORDER GLOW
+        ========================= */
+
+        .project-card::after {
+
+            content: "";
+
+            pointer-events: none;
+
+            position: absolute;
+
+            inset: 0;
+
+            border-radius: 1rem;
+
+            border: 1px solid rgba(0, 229, 255, 0.18);
+
+            box-shadow:
+                inset 0 0 20px rgba(0, 229, 255, 0.08);
+
+            z-index: 1;
+        }
+
+
+        /* =========================
+           CARD HOVER
+        ========================= */
+
+        .project-card:hover {
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 0 12px rgba(0, 229, 255, 0.35),
+                0 0 28px rgba(0, 229, 255, 0.18),
+                0px -10px 28px rgba(126, 87, 255, 0.22) inset;
+        }
+
+
+        /* =========================
+           CARD CONTENT
+        ========================= */
+
+        .project-card > * {
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .project-card h3 {
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+        .project-card h3 a {
+
+            font-size: 1.3rem;
+
+            color: var(--white);
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            line-height: 1.3;
+
+        }
+
+
+        .project-card h3 a:hover {
+
+            color: var(--primary);
+
+        }
+
+
+        .project-description {
+
+            margin-top: 0.25rem;
+
+            width: 100%;
+
+            min-height: 60px;
+
+            color: var(--paragraph);
+
+            font-size: 0.85rem;
+
+            line-height: 1.5;
+
+            margin-bottom: 0;
+
+        }
+
+
+        /* =========================
+           CARD LINE
+        ========================= */
+
+        .project-card .card-line {
+
+            width: 100%;
+
+            height: 0.1rem;
+
+            background-color: var(--line);
+
+            border: none;
+
+            margin: 0;
+
+        }
+
+
+        /* =========================
+           PROJECT DATE
+        ========================= */
+
+        .project-date {
+
+            display: inline-block;
+
+            width: fit-content;
+
+            background-image:
+                linear-gradient(
+                    0deg,
+                    hsl(189,92%,58%),
+                    hsl(189,99%,26%) 100%
+                );
+
+            color: var(--white);
+
+            border: none;
+
+            border-radius: 9999px;
+
+            padding: 0.5rem 0.9rem;
+
+            font-size: 0.75rem;
+
+            box-shadow:
+                inset 0 -2px 15px -4px var(--white);
+
+        }
+
+
+        .project-date::before {
+
+            content: "📅 ";
+
+        }
+
+
+        /* =========================
+           PROJECT OPEN BUTTON
+        ========================= */
+
+        .project-open {
+
+            display: block;
+
+            cursor: pointer;
+
+            padding: 0.65rem;
+
+            width: 100%;
+
+            background-image:
+                linear-gradient(
+                    0deg,
+                    hsl(189,92%,58%),
+                    hsl(189,99%,26%) 100%
+                );
+
+            font-size: 0.8rem;
+
+            color: var(--white);
+
+            text-align: center;
+
+            text-decoration: none;
+
+            border: 0;
+
+            border-radius: 9999px;
+
+            box-shadow:
+                inset 0 -2px 25px -4px var(--white);
+
+            transition:
+                transform 0.2s ease;
+
+        }
+
+
+        .project-open:hover {
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        /* =========================
+           EMPTY PROJECTS
+        ========================= */
+
+        .empty-projects {
+
+            background: #101010;
+
+            padding: 35px;
+
+            text-align: center;
+
+            border-radius: 1rem;
+
+            color: #b5b5b5;
+
+            border: 1px solid #222222;
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,0.5);
+
+        }
+
+
+        .empty-projects p:first-child {
+            color: #ffffff;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .header {
+
+                padding: 18px 20px;
+
+            }
+
+
+            .header-right {
+
+                gap: 10px;
+
+            }
+
+
+            .welcome {
+
+                display: none;
+
+            }
+
+
+            .container {
+
+                width: 92%;
+
+                margin: 25px auto;
+
+            }
+
+
+            .page-title h1 {
+
+                font-size: 25px;
+
+            }
+
+
+            .input__container {
+
+                max-width: 100%;
+
+                padding: 18px;
+
+                transform:
+                    rotateX(6deg)
+                    rotateY(-5deg);
+
+            }
+
+
+            .input__container:hover {
+
+                transform:
+                    rotateX(3deg)
+                    rotateY(1deg)
+                    scale(1.02);
+
+            }
+
+
+            .input__search {
+
+                font-size: 16px;
+
+                padding: 13px;
+
+            }
+
+
+            .description-container::before {
+
+                font-size: 11px;
+
+            }
+
+
+            .create-button {
+
+                font-size: 0.9rem;
+
+            }
+
+
+            .project-card {
+
+                min-height: 210px;
+
+                padding: 1.2rem;
+
+                border-radius: 1rem;
+
+            }
+
+
+            .project-card h3 a {
+
+                font-size: 1.2rem;
+
+            }
+
+
+            .project-description {
+
+                font-size: 0.8rem;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="header">
+
+        <div class="logo">
+            NOVA
+        </div>
+
+
+        <div class="header-right">
+
+            <span class="welcome">
+                Welcome, {{ username }}
+            </span>
+
+
+            <a
+                href="{{ url_for('logout') }}"
+                class="logout"
+            >
+                Logout
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================= -->
+
+    <main class="container">
+
+
+        <div class="page-title">
+
+            <h1>
+                Dashboard
+            </h1>
+
+
+            <p>
+                Manage your projects, tasks and team collaboration.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             CREATE PROJECT
+        ========================= -->
+
+        <section class="create-card">
+
+
+            <h2>
+                Create New Project
+            </h2>
+
+
+            <form
+                method="POST"
+                action="{{ url_for('create_project') }}"
+                class="project-form"
+            >
+
+
+                <!-- PROJECT NAME -->
+
+                <div class="input__container">
+
+                    <div class="shadow__input"></div>
+
+
+                    <input
+                        type="text"
+                        name="name"
+                        class="input__search"
+                        placeholder="PROJECT NAME"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PROJECT DESCRIPTION -->
+
+                <div class="input__container description-container">
+
+                    <div class="shadow__input"></div>
+
+
+                    <textarea
+                        name="description"
+                        class="input__search input__description"
+                        placeholder="PROJECT DESCRIPTION"
+                        rows="4"
+                    ></textarea>
+
+                </div>
+
+
+                <!-- CREATE PROJECT -->
+
+                <button
+                    type="submit"
+                    class="create-button"
+                >
+                    + Create Project
+                </button>
+
+
+            </form>
+
+        </section>
+
+
+        <!-- =========================
+             PROJECTS
+        ========================= -->
+
+        <section>
+
+
+            <div class="projects-header">
+
+                <h2>
+                    Your Projects
+                </h2>
+
+            </div>
+
+
+            {% if projects %}
+
+
+                <div class="projects-grid">
+
+
+                    {% for project in projects %}
+
+
+                        <div class="project-card">
+
+
+                            <h3>
+
+                                <a
+                                    href="{{ url_for('project',project_id=project['id']) }}"
+                                >
+
+                                    {{ project["name"] }}
+
+                                </a>
+
+                            </h3>
+
+
+                            <p class="project-description">
+
+
+                                {% if project["description"] %}
+
+                                    {{ project["description"] }}
+
+                                {% else %}
+
+                                    No description provided.
+
+                                {% endif %}
+
+
+                            </p>
+
+
+                            <hr class="card-line">
+
+
+                            <small class="project-date">
+
+                                Created:
+                                {{ project["created_at"] }}
+
+                            </small>
+
+
+                            <a
+                                href="{{ url_for('project',project_id=project['id']) }}"
+                                class="project-open"
+                            >
+                                Open Project
+                            </a>
+
+
+                        </div>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="empty-projects">
+
+                    <p>
+                        You don't have any projects yet.
+                    </p>
+
+
+                    <br>
+
+
+                    <p>
+                        Create your first project using the form above.
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+    </main>
+
+
+</body>
+
+</html>

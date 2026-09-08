@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NOVA - Register</title>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    /* =========================
+       BODY
+    ========================= */
+
+    body {
+        font-family: Arial, sans-serif;
+
+        background: #050505;
+
+        color: #ffffff;
+
+        min-height: 100vh;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        padding: 25px;
+    }
+
+
+    /* =========================
+       REGISTER CARD
+    ========================= */
+
+    .register-card {
+        position: relative;
+
+        width: 100%;
+
+        max-width: 450px;
+
+        padding: 40px 35px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #171126 0%,
+                #21183d 45%,
+                #10182f 100%
+            );
+
+        border-radius: 1rem;
+
+        border: 1px solid rgba(0, 229, 255, 0.45);
+
+        box-shadow:
+            0 0 8px rgba(0, 229, 255, 0.25),
+            0 0 22px rgba(0, 229, 255, 0.15),
+            0px -10px 24px rgba(126, 87, 255, 0.18) inset;
+
+        overflow: hidden;
+    }
+
+
+    .register-card::before {
+        content: "";
+
+        pointer-events: none;
+
+        position: absolute;
+
+        inset: 0;
+
+        border-radius: 1rem;
+
+        background:
+            radial-gradient(
+                circle at 20% 20%,
+                rgba(126, 87, 255, 0.18),
+                transparent 45%
+            ),
+            radial-gradient(
+                circle at 85% 85%,
+                rgba(0, 229, 255, 0.15),
+                transparent 45%
+            );
+
+        z-index: 0;
+    }
+
+
+    .register-card::after {
+        content: "";
+
+        pointer-events: none;
+
+        position: absolute;
+
+        inset: 0;
+
+        border-radius: 1rem;
+
+        border: 1px solid rgba(0, 229, 255, 0.18);
+
+        box-shadow:
+            inset 0 0 20px rgba(0, 229, 255, 0.08);
+
+        z-index: 1;
+    }
+
+
+    .register-card > * {
+        position: relative;
+
+        z-index: 2;
+    }
+
+
+    /* =========================
+       NOVA LOGO
+    ========================= */
+
+    .logo {
+        text-align: center;
+
+        font-size: 34px;
+
+        font-weight: bold;
+
+        color: #ffffff;
+
+        margin-bottom: 8px;
+
+        letter-spacing: 1px;
+
+        text-shadow:
+            0 0 10px rgba(0, 229, 255, 0.35);
+    }
+
+
+    /* =========================
+       HEADING
+    ========================= */
+
+    .register-title {
+        text-align: center;
+
+        font-size: 24px;
+
+        margin-bottom: 35px;
+
+        color: #ffffff;
+    }
+
+
+    /* =========================
+       FORM
+    ========================= */
+
+    .register-form {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 28px;
+    }
+
+
+    .form-group {
+        width: 100%;
+    }
+
+
+    /* =========================
+       NEUMORPHIC INPUT CONTAINER
+    ========================= */
+
+    .input-container {
+        display: flex;
+
+        background: white;
+
+        border-radius: 1rem;
+
+        background:
+            linear-gradient(
+                173deg,
+                #23272f 0%,
+                #14161a 100%
+            );
+
+        box-shadow:
+            10px 10px 20px #0e1013,
+            -10px -10px 40px #383e4b;
+
+        padding: 0.3rem;
+
+        gap: 0.3rem;
+
+        width: 100%;
+    }
+
+
+    /* =========================
+       INPUT
+    ========================= */
+
+    .input-container input {
+        border-radius: 0.8rem;
+
+        background: #23272f;
+
+        box-shadow:
+            inset 5px 5px 10px #0e1013,
+            inset -5px -5px 10px #383e4b,
+            0px 0px 100px rgba(255, 212, 59, 0),
+            0px 0px 100px rgba(255, 102, 0, 0);
+
+        width: 100%;
+
+        flex-basis: 100%;
+
+        padding: 1rem;
+
+        border: none;
+
+        border: 1px solid transparent;
+
+        color: white;
+
+        transition:
+            all 0.2s ease-in-out;
+
+        font-family:
+            Arial,
+            sans-serif;
+
+        font-size: 15px;
+    }
+
+
+    .input-container input::placeholder {
+        color: #9da3ad;
+    }
+
+
+    .input-container input:focus {
+        border: 1px solid #ffd43b;
+
+        outline: none;
+
+        box-shadow:
+            inset 0px 0px 10px rgba(255, 102, 0, 0.5),
+            inset 0px 0px 10px rgba(255, 212, 59, 0.5),
+            0px 0px 100px rgba(255, 212, 59, 0.5),
+            0px 0px 100px rgba(255, 102, 0, 0.5);
+    }
+
+
+    /* =========================
+       REGISTER BUTTON
+    ========================= */
+
+    .register-button {
+        width: fit-content;
+
+        align-self: center;
+
+        margin-top: 5px;
+
+        font-size: 1rem;
+
+        padding: 0.8em 2em;
+
+        background-color: #000;
+
+        border: 3px solid yellow;
+
+        border-radius: 1em;
+
+        color: #fff;
+
+        font-weight: bolder;
+
+        cursor: pointer;
+
+        transition:
+            cubic-bezier(
+                0.68,
+                -0.55,
+                0.265,
+                1.55
+            ) 0.4s;
+
+        box-shadow:
+            -5px 5px 0px 0px yellow;
+    }
+
+
+    .register-button:hover {
+        transform:
+            translate(5px,-5px);
+
+        background-color: #000;
+
+        box-shadow:
+            -5px 5px 0px 0px yellow;
+    }
+
+
+    .register-button:active {
+        transform:
+            translate(2px,-2px);
+
+        box-shadow:
+            -2px 2px 0px 0px yellow;
+    }
+
+
+    /* =========================
+       LOGIN LINK
+    ========================= */
+
+    .login-text {
+        text-align: center;
+
+        margin-top: 28px;
+
+        color: #aaa;
+
+        font-size: 14px;
+    }
+
+
+    .login-link {
+        color: #00e5ff;
+
+        text-decoration: none;
+
+        font-weight: bold;
+
+        margin-left: 4px;
+
+        transition:
+            color 0.2s ease;
+    }
+
+
+    .login-link:hover {
+        color: #ffffff;
+
+        text-decoration: underline;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 500px) {
+
+        body {
+            padding: 18px;
+        }
+
+
+        .register-card {
+            padding: 32px 22px;
+        }
+
+
+        .logo {
+            font-size: 30px;
+        }
+
+
+        .register-title {
+            font-size: 21px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .register-form {
+            gap: 24px;
+        }
+
+
+        .input-container {
+            flex-direction: column;
+        }
+
+
+        .input-container input {
+            border-radius: 0.8rem;
+
+            font-size: 15px;
+
+            padding: 13px;
+        }
+
+
+        .register-button {
+            width: 100%;
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<div class="register-card">
+
+
+    <!-- Logo -->
+
+    <div class="logo">
+        NOVA
+    </div>
+
+
+    <!-- Heading -->
+
+    <h2 class="register-title">
+        Create Account
+    </h2>
+
+
+    <!-- Register Form -->
+
+    <form
+        method="POST"
+        class="register-form"
+    >
+
+
+        <!-- Username -->
+
+        <div class="form-group">
+
+            <div class="input-container">
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- Email -->
+
+        <div class="form-group">
+
+            <div class="input-container">
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- Password -->
+
+        <div class="form-group">
+
+            <div class="input-container">
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- Button -->
+
+        <button
+            type="submit"
+            class="register-button"
+        >
+            Register
+        </button>
+
+
+    </form>
+
+
+    <!-- Login -->
+
+    <p class="login-text">
+
+        Already have an account?
+
+        <a
+            href="{{ url_for('login') }}"
+            class="login-link"
+        >
+            Login
+        </a>
+
+    </p>
+
+
+</div>
+
+</body>
+
+</html>

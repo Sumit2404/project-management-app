@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>NOVA - Login</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 25px;
+
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(0, 229, 255, 0.18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 80% 70%,
+                    rgba(0, 150, 255, 0.15),
+                    transparent 40%
+                ),
+                #1a2227;
+        }
+
+
+        /* =========================
+           ISLAND BACKGROUND
+        ========================= */
+
+        .island {
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+
+            top: 0;
+            left: 0;
+
+            opacity: 0.65;
+
+            background:
+                radial-gradient(
+                    ellipse at 20% 30%,
+                    rgba(255,255,255,0.15) 0%,
+                    transparent 25%
+                ),
+                radial-gradient(
+                    ellipse at 70% 20%,
+                    rgba(0,229,255,0.20) 0%,
+                    transparent 30%
+                ),
+                radial-gradient(
+                    ellipse at 40% 80%,
+                    rgba(255,255,255,0.10) 0%,
+                    transparent 25%
+                ),
+                #344149;
+
+            filter: brightness(1.15) contrast(1.3);
+
+            z-index: 0;
+        }
+
+
+        .islandt {
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+
+            top: 0;
+            left: 0;
+
+            opacity: 0.5;
+
+            background:
+                repeating-radial-gradient(
+                    ellipse at 30% 40%,
+                    transparent 0px,
+                    transparent 18px,
+                    rgba(255,255,255,0.035) 20px,
+                    transparent 25px
+                ),
+                repeating-radial-gradient(
+                    ellipse at 75% 65%,
+                    transparent 0px,
+                    transparent 25px,
+                    rgba(0,229,255,0.04) 28px,
+                    transparent 35px
+                );
+
+            filter: brightness(1.2) contrast(1.2);
+
+            z-index: 1;
+
+            pointer-events: none;
+        }
+
+
+        /* =========================
+           LOGIN CONTENT
+        ========================= */
+
+        .login-container {
+            width: 430px;
+            position: relative;
+            z-index: 10;
+        }
+
+
+        /* =========================
+           NOVA TITLE
+        ========================= */
+
+        .nova-title {
+            text-align: center;
+
+            color: #00e5ff;
+
+            font-size: 52px;
+            font-weight: 900;
+
+            letter-spacing: 5px;
+
+            margin-bottom: 22px;
+
+            -webkit-text-stroke: 2px #000000;
+
+            text-shadow:
+                4px 4px 0px #000000,
+                7px 7px 0px rgba(0, 0, 0, 0.35);
+        }
+
+
+        /* =========================
+           LOGIN FORM
+        ========================= */
+
+        .form {
+            display: flex;
+            flex-direction: column;
+
+            gap: 15px;
+
+            background-color: #add8e6;
+
+            padding: 30px;
+
+            border-radius: 5px;
+
+            border: 3px solid #000000;
+
+            box-shadow:
+                8px 8px 0px #000000;
+        }
+
+
+        .form h2 {
+            text-align: center;
+
+            font-size: 28px;
+
+            font-weight: 900;
+
+            color: #000000;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* =========================
+           INPUTS
+        ========================= */
+
+        .input {
+            width: 100%;
+
+            padding: 14px;
+
+            border: 2px solid #000000;
+
+            background-color: #fff8dc;
+
+            color: #000000;
+
+            font-size: 16px;
+
+            outline: none;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .input:focus {
+            border: 2px solid #000000;
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                7px 7px #000000;
+        }
+
+
+        .input:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                7px 7px #000000;
+        }
+
+
+        .input::placeholder {
+            color: #555555;
+        }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        button {
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .button-confirm {
+            width: 100%;
+
+            padding: 14px;
+
+            border: 3px solid #000000;
+
+            background-color: #00e5ff;
+
+            color: #000000;
+
+            font-size: 17px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                5px 5px 0px #000000;
+
+            text-transform: uppercase;
+        }
+
+
+        .button-confirm:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                8px 8px 0px #000000;
+
+            background-color: #fff8dc;
+        }
+
+
+        .button-confirm:active {
+            box-shadow:
+                0px 0px var(--main-color);
+
+            transform: translate(4px, 4px);
+        }
+
+
+        /* =========================
+           REGISTER LINK
+        ========================= */
+
+        .register-link {
+            text-align: center;
+
+            margin-top: 5px;
+
+            font-size: 14px;
+
+            color: #000000;
+        }
+
+
+        .register-link a {
+            color: #000000;
+
+            font-weight: 900;
+
+            text-decoration: underline;
+        }
+
+
+        .register-link a:hover {
+            color: #0066ff;
+        }
+
+
+        /* =========================
+           ERROR OVERLAY
+        ========================= */
+
+        .error-overlay {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0, 0, 0, 0.65);
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+
+            z-index: 1000;
+        }
+
+
+        /* =========================
+           BRUTALIST ERROR CARD
+        ========================= */
+
+        .brutalist-card {
+            width: 320px;
+
+            border: 4px solid #000;
+
+            background-color: #fff;
+
+            padding: 1.5rem;
+
+            box-shadow: 10px 10px 0 #000;
+
+            font-family: Arial, sans-serif;
+        }
+
+
+        .brutalist-card__header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 1rem;
+
+            margin-bottom: 1rem;
+
+            border-bottom: 2px solid #000;
+
+            padding-bottom: 1rem;
+        }
+
+
+        .brutalist-card__icon {
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background-color: #000;
+
+            padding: 0.5rem;
+        }
+
+
+        .brutalist-card__icon svg {
+            height: 1.5rem;
+            width: 1.5rem;
+
+            fill: #fff;
+        }
+
+
+        .brutalist-card__alert {
+            font-weight: 900;
+
+            color: #000;
+
+            font-size: 1.5rem;
+
+            text-transform: uppercase;
+        }
+
+
+        .brutalist-card__message {
+            margin-top: 1rem;
+
+            color: #000;
+
+            font-size: 0.9rem;
+
+            line-height: 1.4;
+
+            border-bottom: 2px solid #000;
+
+            padding-bottom: 1rem;
+
+            font-weight: 600;
+        }
+
+
+        .brutalist-card__actions {
+            margin-top: 1rem;
+        }
+
+
+        .brutalist-card__button {
+            display: block;
+
+            width: 100%;
+
+            padding: 0.75rem;
+
+            text-align: center;
+
+            font-size: 1rem;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            border: 3px solid #000;
+
+            background-color: #fff;
+
+            color: #000;
+
+            position: relative;
+
+            transition: all 0.2s ease;
+
+            box-shadow: 5px 5px 0 #000;
+
+            overflow: hidden;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            margin-bottom: 1rem;
+        }
+
+
+        .brutalist-card__button::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: -100%;
+
+            width: 100%;
+            height: 100%;
+
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+
+            transition: all 0.6s;
+        }
+
+
+        .brutalist-card__button:hover::before {
+            left: 100%;
+        }
+
+
+        .brutalist-card__button:hover {
+            transform: translate(-2px, -2px);
+
+            box-shadow:
+                7px 7px 0 #000;
+        }
+
+
+        .brutalist-card__button--read {
+            background-color: #000;
+
+            color: #fff;
+        }
+
+
+        .brutalist-card__button--read:hover {
+            background-color: #ff0000;
+
+            border-color: #ff0000;
+
+            color: #fff;
+
+            box-shadow:
+                7px 7px 0 #800000;
+        }
+
+
+        .brutalist-card__button:active {
+            transform: translate(5px, 5px);
+
+            box-shadow: none;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 20px;
+            }
+
+            .login-container {
+                width: 100%;
+                max-width: 430px;
+            }
+
+            .nova-title {
+                font-size: 42px;
+            }
+
+            .form {
+                padding: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- Background layers -->
+
+    <div class="island"></div>
+
+    <div class="islandt"></div>
+
+
+    <!-- Login content -->
+
+    <div class="login-container">
+
+        <div class="nova-title">
+            NOVA
+        </div>
+
+
+        <form class="form" method="POST">
+
+            <h2>Login</h2>
+
+
+            <input
+                class="input"
+                type="email"
+                name="email"
+                placeholder="Email"
+                required
+            >
+
+
+            <input
+                class="input"
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="button-confirm"
+            >
+                Login
+            </button>
+
+
+            <div class="register-link">
+
+                Don't have an account?
+
+                <a href="{{ url_for('register') }}">
+                    Create account
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- =========================
+         ERROR MESSAGE
+    ========================= -->
+
+    {% if error %}
+
+    <div class="error-overlay">
+
+        <div class="brutalist-card">
+
+            <div class="brutalist-card__header">
+
+                <div class="brutalist-card__icon">
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                    >
+
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <div class="brutalist-card__alert">
+                    Login Failed
+                </div>
+
+            </div>
+
+
+            <div class="brutalist-card__message">
+
+                {{ error }}
+
+            </div>
+
+
+            <div class="brutalist-card__actions">
+
+                <button
+                    type="button"
+                    class="brutalist-card__button brutalist-card__button--read"
+                    onclick="closeError()"
+                >
+                    Try Again
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <script>
+
+        function closeError() {
+
+            const errorOverlay =
+                document.querySelector(".error-overlay");
+
+            if(errorOverlay) {
+
+                errorOverlay.style.display="none";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
